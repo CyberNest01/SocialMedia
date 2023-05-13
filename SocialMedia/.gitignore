@@ -1,0 +1,4 @@
+.idea
+media
+db.sqlite3
+*.pyc

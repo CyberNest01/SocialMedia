@@ -1,3 +1,8 @@
 Django
 pillow
 django-mptt
+djangorestframework
+drf_yasg
+django-cors-headers
+djangorestframework_simplejwt
+PyJWT==v1.7.1

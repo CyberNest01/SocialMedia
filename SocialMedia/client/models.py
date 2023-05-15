@@ -1,3 +1,4 @@
+from django.contrib.auth import login
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
@@ -16,6 +17,12 @@ class User(AbstractUser):
     image = models.ImageField(upload_to=profile_image, null=True, blank=True)
     report_count = models.IntegerField(default=0)
     ban = models.BooleanField(default=False)
+
+    def login(self, request):
+        if self.is_active:
+            login(request, self)
+            return True
+        return False
 
     def ban_user(self):
         self.ban = True

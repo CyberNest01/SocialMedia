@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'client',
     'post',
     'chat',
+    'story',
 ]
 
 AUTH_USER_MODEL = "client.User"

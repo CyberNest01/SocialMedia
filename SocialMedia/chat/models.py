@@ -19,7 +19,7 @@ class Chats(models.Model):
 
 class Group(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="group_owner")
-    users = models.ManyToManyField(User, related_name="group_users", null=True, blank=True)
+    users = models.ManyToManyField(User, related_name="group_users")
     name = models.CharField(max_length=255)
     link = models.CharField(max_length=255)
     bio = models.TextField()

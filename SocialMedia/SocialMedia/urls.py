@@ -48,6 +48,7 @@ urlpatterns = [
 urlpatterns += [path('', include('client.urls'))]
 urlpatterns += [path('', include('post.urls'))]
 urlpatterns += [path('', include('chat.urls'))]
+urlpatterns += [path('', include('story.urls'))]
 
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

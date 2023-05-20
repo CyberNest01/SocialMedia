@@ -26,3 +26,8 @@ class RegisterViewDto(serializers.Serializer):
     username = serializers.CharField()
     password = serializers.CharField()
     re_password = serializers.CharField()
+
+
+class ReportViewDto(serializers.Serializer):
+    user = serializers.IntegerField()
+    text = serializers.CharField()

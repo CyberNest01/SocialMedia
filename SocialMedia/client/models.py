@@ -43,13 +43,8 @@ class Report(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def report_user(self):
-        try:
-            user = User.objects.get(user=self.user, is_active=True)
-            user.report_count += 1
-            user.save()
-        except:
-            return 0
-        return 1
+        self.user.report_count += 1
+        self.user.save()
 
 
 class Friends(models.Model):

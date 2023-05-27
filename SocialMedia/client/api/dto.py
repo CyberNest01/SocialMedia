@@ -28,6 +28,18 @@ class RegisterViewDto(serializers.Serializer):
     re_password = serializers.CharField()
 
 
+class RequestStatusViewDto(serializers.Serializer):
+    status = serializers.BooleanField()
+
 class ReportViewDto(serializers.Serializer):
     user = serializers.IntegerField()
     text = serializers.CharField()
+
+
+
+class RequestUserViewDto(serializers.Serializer):
+    user = serializers.IntegerField()
+
+
+class RequestUserStatusViewDto(serializers.Serializer):
+    status = serializers.BooleanField()

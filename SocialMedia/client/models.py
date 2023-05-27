@@ -47,9 +47,37 @@ class Report(models.Model):
         self.user.save()
 
 
-class Friends(models.Model):
-    name = models.CharField(max_length=255)
-    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="friends_owner")
-    users = models.ManyToManyField(User, related_name="friends_users")
+class RequestUser(models.Model):
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="request_owner")
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="request_user")
+    status = models.BooleanField(default=False)
+    deleted = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def friends(self):
+        if not self.user.privet:
+            friends = Friends(request_user=self)
+            friends.save()
+            self.status = True
+            self.save()
+
+    def set_friend(self):
+        friend = Friends(request_user=self)
+        friend.save()
+
+    def delete(self, *args, **kwargs):
+        self.deleted = True
+        super(RequestUser, self).save()
+
+
+class Friends(models.Model):
+    name = models.CharField(max_length=255, null=True, blank=True)
+    request_user = models.OneToOneField(RequestUser, on_delete=models.CASCADE, related_name="friends_request")
+    deleted = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def delete(self, *args, **kwargs):
+        self.deleted = True
+        super(Friends, self).save()

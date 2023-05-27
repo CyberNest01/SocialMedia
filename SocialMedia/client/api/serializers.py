@@ -22,3 +22,20 @@ class ReportSerializer(serializers.ModelSerializer):
     class Meta:
         model = Report
         fields = '__all__'
+
+
+class RequestSerializer(serializers.ModelSerializer):
+    owner = UserSafeSerializer(many=False, read_only=True)
+    user = UserSafeSerializer(many=False, read_only=True)
+
+    class Meta:
+        model = RequestUser
+        fields = '__all__'
+
+
+class FriendsSerializer(serializers.ModelSerializer):
+    request_user = RequestSerializer(many=False, read_only=True)
+
+    class Meta:
+        model = RequestUser
+        fields = '__all__'

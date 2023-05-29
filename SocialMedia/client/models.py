@@ -18,6 +18,14 @@ class User(AbstractUser):
     report_count = models.IntegerField(default=0)
     ban = models.BooleanField(default=False)
 
+    @staticmethod
+    def get_friends(request):
+        request_user_owner = RequestUser.objects.filter(owner=request.user, deleted=False, status=True).values(
+            'user_id')
+        request_user_user = RequestUser.objects.filter(user=request.user, deleted=False, status=True).values('owner_id')
+        request_user = request_user_owner.union(request_user_user, all=True)
+        return User.objects.filter(id__in=request_user, is_active=True)
+
     def login(self, request):
         if self.is_active:
             login(request, self)

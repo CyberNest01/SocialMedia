@@ -39,7 +39,6 @@ class Blog(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
     category = models.ManyToManyField(Category)
-    like = models.OneToOneField(Like, on_delete=models.CASCADE)
     status = models.BooleanField(default=True)
     deleted = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)

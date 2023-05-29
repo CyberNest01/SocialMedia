@@ -1,13 +1,13 @@
 from .imports import *
 
 
-class PostList(APIView):
+class FriendsPostList(APIView):
     permission_classes = [IsAuthenticated, ]
 
     @swagger_auto_schema(responses={200: BlogViewDto(many=True)})
     def get(self, request):
         context = {}
-        posts = Blog.objects.filter(owner__privet=False, deleted=False, status=True, owner__is_active=True)
+        posts = Blog.objects.filter(owner__in=User.get_friends(request), deleted=False, status=True, owner__is_active=True)
         context['posts'] = BlogSerializer(posts, many=True).data
         context['msg'] = 'دریافت شد'
         status_code = HTTP_200_OK

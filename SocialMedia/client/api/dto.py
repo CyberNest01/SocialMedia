@@ -31,10 +31,10 @@ class RegisterViewDto(serializers.Serializer):
 class RequestStatusViewDto(serializers.Serializer):
     status = serializers.BooleanField()
 
+
 class ReportViewDto(serializers.Serializer):
     user = serializers.IntegerField()
     text = serializers.CharField()
-
 
 
 class RequestUserViewDto(serializers.Serializer):
@@ -43,3 +43,8 @@ class RequestUserViewDto(serializers.Serializer):
 
 class RequestUserStatusViewDto(serializers.Serializer):
     status = serializers.BooleanField()
+
+
+class FriendsViewDto(serializers.Serializer):
+    name = serializers.CharField(required=False)
+    request_user = serializers.IntegerField()

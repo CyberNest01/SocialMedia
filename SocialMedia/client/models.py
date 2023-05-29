@@ -66,6 +66,16 @@ class RequestUser(models.Model):
         friend = Friends(request_user=self)
         friend.save()
 
+    def remove_friend(self):
+        try:
+            friend = Friends.objects.get(request_user=self)
+            friend.delete()
+            self.status = False
+            self.save()
+            return 1
+        except:
+            return 0
+
     def delete(self, *args, **kwargs):
         self.deleted = True
         super(RequestUser, self).save()

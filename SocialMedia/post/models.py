@@ -39,6 +39,7 @@ class Blog(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
     category = models.ManyToManyField(Category)
+    is_comment = models.BooleanField(default=True)
     status = models.BooleanField(default=True)
     deleted = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)

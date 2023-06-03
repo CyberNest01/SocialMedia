@@ -3,11 +3,11 @@ from client.models import User
 from post.models import *
 
 
-class UserSerializer(serializers.ModelSerializer):
+class UserSafeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        exclude = ['password', 'report_count', 'ban']
+        fields = ['username', 'first_name', 'last_name']
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -17,7 +17,7 @@ class CategorySerializer(serializers.ModelSerializer):
 
 
 class LikeSerializer(serializers.ModelSerializer):
-    owner = UserSerializer(many=False, read_only=True)
+    owner = UserSafeSerializer(many=False, read_only=True)
 
     class Meta:
         model = Like
@@ -25,7 +25,7 @@ class LikeSerializer(serializers.ModelSerializer):
 
 
 class BlogSerializer(serializers.ModelSerializer):
-    owner = UserSerializer(many=False, read_only=True)
+    owner = UserSafeSerializer(many=False, read_only=True)
     like = LikeSerializer(many=False, read_only=True)
     category = serializers.SerializerMethodField()
 

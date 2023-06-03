@@ -2,7 +2,13 @@ from rest_framework import serializers
 
 
 class BlogViewDto(serializers.Serializer):
-    image = serializers.FileField()
     title = serializers.CharField()
     description = serializers.CharField()
-    category = serializers.ListField()
+    is_comment = serializers.BooleanField()
+    image = serializers.FileField(required=False)
+    category = serializers.ListField(required=False)
+
+
+class CategoryViewDto(serializers.Serializer):
+    name = serializers.CharField()
+    parent = serializers.IntegerField(required=False)

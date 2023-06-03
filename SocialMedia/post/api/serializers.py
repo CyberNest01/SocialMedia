@@ -16,17 +16,8 @@ class CategorySerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class LikeSerializer(serializers.ModelSerializer):
-    owner = UserSafeSerializer(many=False, read_only=True)
-
-    class Meta:
-        model = Like
-        fields = '__all__'
-
-
 class BlogSerializer(serializers.ModelSerializer):
     owner = UserSafeSerializer(many=False, read_only=True)
-    like = LikeSerializer(many=False, read_only=True)
     category = serializers.SerializerMethodField()
 
     class Meta:
@@ -36,3 +27,13 @@ class BlogSerializer(serializers.ModelSerializer):
     @staticmethod
     def get_category(obj):
         return CategorySerializer(obj.category.all(), many=True).data
+
+
+class LikeSerializer(serializers.ModelSerializer):
+    owner = UserSafeSerializer(many=False, read_only=True)
+    blog = BlogSerializer(many=False, read_only=True)
+
+    class Meta:
+        model = Like
+        fields = '__all__'
+

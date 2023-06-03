@@ -12,3 +12,8 @@ class BlogViewDto(serializers.Serializer):
 class CategoryViewDto(serializers.Serializer):
     name = serializers.CharField()
     parent = serializers.IntegerField(required=False)
+
+
+class LikeViewDto(serializers.Serializer):
+    like = serializers.BooleanField()
+    blog = serializers.IntegerField()

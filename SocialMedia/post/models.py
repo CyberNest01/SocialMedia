@@ -14,21 +14,6 @@ class Category(MPTTModel):
     updated_at = models.DateTimeField(auto_now=True)
 
 
-class Like(models.Model):
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
-    like = models.BooleanField(default=False)
-
-    def like_post(self):
-        if not self.like:
-            self.like = True
-            self.save()
-
-    def dislike_post(self):
-        if self.like:
-            self.like = False
-            self.save()
-
-
 def blog_file(instance, filename):
     return "%s/%s/%s" % ('blog', instance.username, filename)
 
@@ -62,4 +47,9 @@ class Comments(models.Model):
         self.deleted = True
         super(Comments, self).save()
 
+
+class Like(models.Model):
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    like = models.BooleanField(default=False)
+    blog = models.ForeignKey(Blog, on_delete=models.CASCADE)
 

@@ -1,6 +1,4 @@
-from rest_framework import serializers
-from client.models import User
-from post.models import *
+from .imports import *
 
 
 class UserSafeSerializer(serializers.ModelSerializer):
@@ -37,3 +35,11 @@ class LikeSerializer(serializers.ModelSerializer):
         model = Like
         fields = '__all__'
 
+
+class CommentsSerializer(serializers.ModelSerializer):
+    owner = UserSafeSerializer(many=False, read_only=True)
+    blog = BlogSerializer(many=False, read_only=True)
+
+    class Meta:
+        model = Comments
+        exclude = ['deleted']

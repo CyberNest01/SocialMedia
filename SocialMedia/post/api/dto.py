@@ -17,3 +17,12 @@ class CategoryViewDto(serializers.Serializer):
 class LikeViewDto(serializers.Serializer):
     like = serializers.BooleanField()
     blog = serializers.IntegerField()
+
+
+class CommentsViewDto(serializers.Serializer):
+    blog = serializers.IntegerField()
+    message = serializers.CharField()
+
+
+class CommentsEditViewDto(serializers.Serializer):
+    message = serializers.CharField()

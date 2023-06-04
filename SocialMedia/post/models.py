@@ -1,7 +1,6 @@
 from django.db import models
 from mptt.fields import TreeForeignKey
 from mptt.models import MPTTModel
-
 from client.models import User
 
 

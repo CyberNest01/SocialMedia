@@ -13,8 +13,8 @@ def story_file(instance, filename):
 
 
 class Story(models.Model):
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
-    friends = models.ManyToManyField(Friends)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='owner_story')
+    friends = models.ManyToManyField(User)
     privet = models.BooleanField(default=False)
     title = models.CharField(max_length=255, null=True, blank=True)
     story_file = models.FileField(upload_to=story_file, null=True, blank=True)
